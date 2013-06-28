@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Learn d3</title>
+  <link rel="stylesheet" href="css/normalize.css">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/codemirror.css">    
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <script type="text/x-handlebars">
+    {{outlet}}
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="chapters">
+  <div id="wrap">
+    <div class="container">
+      <div class="row">        
+        <br/>
+      </div>      
+      <div id="arena"> 
+        <h2>Learn d3</h2>
+          <ul class="nav nav-tabs">
+
+            {{#linkTo "chapters.index" tagName="li"}}
+              <a>Welcome</a>
+            {{/linkTo}}
+
+            {{#each controller}}
+              {{#linkTo "chapter" this tagName="li"}}
+                <a>{{title}}</a>
+              {{/linkTo}}
+            {{/each}}
+
+            {{#linkTo "resources" tagName="li"}}
+              <a>Resources</a>
+            {{/linkTo}}
+
+          </ul>       
+
+        <br />
+
+        {{outlet}}
+
+      </div>
+    </div>
+  </div>
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="chapters/index">
+    Please select a chapter to start!
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="resources">
+    Here are some good resources:
+  </script>
+
+  <script type="text/x-handlebars" data-template-name="chapter">
+    <div class="row">
+      <div class="span14">
+        {{md description}}
+      </div>
+    </div>
+    <div class="row">
+      <div id="graph">
+      </div>       
+    </div>
+    <div class="pull-right">
+      <a class="btn btn-primary" {{action "reset"}}>Clear Graph</a>
+      <a class="btn btn-success" {{action "render"}}>Render Graph</a>
+    </div>
+    <br />
+    <div class="row">
+      <div class="span4">      
+        <div class="accordion" id="accordion2">
+        {{#each steps itemController="step"}}
+          <div class="accordion-group">
+            <div class="accordion-heading">
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" {{bindAttr data-target=this.hashedID}}>
+                Step #1
+              </a>
+            </div>
+            <div {{bindAttr id=this.ID}} class="accordion-body collapse out">
+              <div class="accordion-inner">
+                {{text}}
+              </div>
+            </div>
+          </div>          
+        {{/each}}
+      </div>
+      </div>
+      <div class="span7">    
+        <strong>Code</strong> <br/>
+        {{view App.CodeEditor valueBinding=code class="input-xxlarge" rows=15}} <br/>
+        <strong>Data</strong> <br/>
+        {{view App.CodeEditor valueBinding=seed class="input-xxlarge" rows=5}} <br/>       
+        On changing data, graph function is re-run automatically
+      </div>
+    </div>
+  </script>
+
+  <script src="js/libs/jquery-1.9.1.js"></script>
+  <script src="js/libs/bootstrap.min.js"></script>
+  <script src="js/libs/markdown.js"></script>
+  <script src="js/libs/codemirror.js"></script>
+  <script src="js/libs/matchbrackets.js"></script>
+  <script src="js/libs/continuecomment.js"></script>
+  <script src="js/libs/comment.js"></script>
+  <script src="js/libs/javascript.js"></script>
+  <script src="js/libs/d3.min.js"></script>
+  <script src="js/libs/handlebars-1.0.0-rc.4.js"></script>
+  <script src="js/libs/ember-1.0.0-rc.6.js"></script>
+  <script src="js/libs/ember-data-latest.js"></script>
+  <script src="js/app.js"></script>
+  <script src="data/fixtures.js"></script>
+
+</body>
+</html>

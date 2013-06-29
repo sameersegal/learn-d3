@@ -1,5 +1,7 @@
 function setup(data) {
+	// select the graph
 	var graph = d3.select("#graph");
+	// add add a container
 	var g = graph
 			   .append("svg")
 			   .append("g");
@@ -11,8 +13,10 @@ function draw(svg, data) {
 	 .data(data)
 	 .enter()
 	 .append("circle")
+	 // center
 	 .attr("cx",function(d) { return d*50;})
 	 .attr("cy",function(d) { return d*50;})
+	 // radius
 	 .attr("r",10)
 	 .attr("fill","steelblue");
 }

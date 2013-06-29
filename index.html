@@ -85,10 +85,7 @@
             <div {{bindAttr id=this.ID}} class="accordion-body collapse out">
               <div class="accordion-inner">
                 <div class="pull-right">
-                    <a class="btn btn-mini btn-primary">Data</a>
-                    <br/>
-                    <br/>
-                    <a class="btn btn-mini btn-danger">Code</a>
+                    <a class="btn btn-mini btn-primary" {{action "load"}}>Load</a>
                 </div>
                 {{text}}
               </div>
@@ -99,9 +96,9 @@
       </div>
       <div class="span7">    
         <strong>Code</strong> <br/>
-        {{view App.CodeEditor valueBinding=code class="input-xxlarge" rows=15}} <br/>
+        {{view App.CodeEditor valueBinding=code class="input-xxlarge code" rows=15}} <br/>
         <strong>Data</strong> <br/>
-        {{view App.CodeEditor valueBinding=seed class="input-xxlarge" rows=5}} <br/>       
+        {{view App.CodeEditor valueBinding=seed class="input-xxlarge data" rows=5}} <br/>       
         On changing data, graph function is re-run automatically
       </div>
     </div>

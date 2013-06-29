@@ -2,6 +2,8 @@ App = Ember.Application.create({
 	LOG_TRANSITIONS: true
 });
 
+App.CodeEditors = {};
+
 App.Router.map(function() {
 	this.resource("chapters", function(){
 		this.resource("chapter",{path:":chapter_id"});
@@ -45,12 +47,23 @@ App.ChaptersController = Ember.ArrayController.extend({
 
 App.ChapterController = Ember.ObjectController.extend({
 
+	svg: null,
+
 	dataObserver: function() {
 		console.log("seed");
 	}.observes('seed'),
 
 	render: function() {
+		var codeStr = App.CodeEditors.code.getValue();
+		var dataStr = App.CodeEditors.data.getValue();
 
+		var data = dataStr.split(/\n/).map(function(d) { return parseFloat(d); });
+		eval(codeStr);
+		if(!this.get("svg")) {
+			this.set("svg",setup(data));
+		}
+
+		draw(this.get("svg"),data);
 	},
 
 	reset: function() {
@@ -59,6 +72,9 @@ App.ChapterController = Ember.ObjectController.extend({
 });
 
 App.StepController = Ember.ObjectController.extend({
+
+	needs: ["chapter"],
+
 	hashedID: function() {
 		return "#collapse" + this.get("id");
 	}.property("id"),
@@ -66,6 +82,11 @@ App.StepController = Ember.ObjectController.extend({
 	ID: function() {
 		return "collapse" + this.get("id");
 	}.property("id"),
+
+	load: function() {	
+		var code = this.get("content.code");
+		App.CodeEditors.code.setValue(code);
+	}
 });
 
 // Models & Adapters
@@ -99,11 +120,13 @@ Ember.Handlebars.registerBoundHelper('md', function(value) {
 App.CodeEditor = Ember.TextArea.extend({
 	attributeBindings: ["rows"],
 	didInsertElement: function() {
-		CodeMirror.fromTextArea(document.getElementById(this.elementId), {
-        lineNumbers: true,
-        matchBrackets: true,
-        continueComments: "Enter",
-        extraKeys: {"Ctrl-Q": "toggleComment"}
-      });
-	}
+		var editor = CodeMirror.fromTextArea(document.getElementById(this.elementId), {
+	        lineNumbers: true,
+	        matchBrackets: true,
+	        continueComments: "Enter",
+	        extraKeys: {"Ctrl-Q": "toggleComment"}
+	      });
+		var type = this.classNames.splice(-1)[0]
+		App.CodeEditors[type] = editor;
+	},
 });

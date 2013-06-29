@@ -4,7 +4,7 @@ App.Chapter.FIXTURES = [
 		"title": "Philosophy",
 		"description": "D3 understands ```enter```,```update``` and ```exit``` states for data. It is important to disect a visualization and specify d3 actions based on the three states of data. Follow the steps below to experiment and see this amazing capability of D3",
 		"seed": "1\n2\n3\n4",
-		"code": "function(data) {\n\n}",
+		"code": "function setup(data) {\n\t// select the graph\n\tvar graph = d3.select(\"#graph\");\n\t// add add a container\n\tvar g = graph\n\t\t\t   .append(\"svg\")\n\t\t\t   .append(\"g\");\n\treturn g;\n}",
 		"steps": [1,2,3,4]
 	},
 	{
@@ -37,7 +37,7 @@ App.Step.FIXTURES = [
 		"id": 1,
 		"title": "Enter Data",
 		"text": "Enter single digit numbers in the data editor and see them pop up in the graph",
-		"code": null,
+		"code": "function setup(data) {\n\t// select the graph\n\tvar graph = d3.select(\"#graph\");\n\t// add add a container\n\tvar g = graph\n\t\t\t   .append(\"svg\")\n\t\t\t   .append(\"g\");\n\treturn g;\n}\n\nfunction draw(svg, data) {\n\tsvg.selectAll(\"circle\")\n\t .data(data)\n\t .enter()\n\t .append(\"circle\")\n\t // center\n\t .attr(\"cx\",function(d) { return d*50;})\n\t .attr(\"cy\",function(d) { return d*50;})\n\t // radius\n\t .attr(\"r\",10)\n\t .attr(\"fill\",\"steelblue\");\n}",
 		"data": "1\n2\n3\n4"
 	},
 	{
@@ -94,7 +94,7 @@ App.Step.FIXTURES = [
 	{
 		"id": 15,
 		"title": "Translating / Orientation",
-		"text": "Take a look at this: http://bl.ocks.org/mbostock/3019563 and modify your graph",
+		"text": "Take a look at [this](http://bl.ocks.org/mbostock/3019563) and modify your graph",
 		"code": null,
 		"data": "1\n2\n3\n4"
 	},

@@ -50,11 +50,11 @@
   </script>
 
   <script type="text/x-handlebars" data-template-name="chapters/index">
-    Please select a chapter to start!
+    {{md note}}
   </script>
 
   <script type="text/x-handlebars" data-template-name="resources">
-    Here are some good resources:
+    {{md note}}
   </script>
 
   <script type="text/x-handlebars" data-template-name="chapter">
@@ -78,12 +78,18 @@
         {{#each steps itemController="step"}}
           <div class="accordion-group">
             <div class="accordion-heading">
-              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" {{bindAttr data-target=this.hashedID}}>
-                Step #1
-              </a>
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" {{bindAttr data-target=this.hashedID}}>                
+                {{title}}                
+              </a>              
             </div>
             <div {{bindAttr id=this.ID}} class="accordion-body collapse out">
               <div class="accordion-inner">
+                <div class="pull-right">
+                    <a class="btn btn-mini btn-primary">Data</a>
+                    <br/>
+                    <br/>
+                    <a class="btn btn-mini btn-danger">Code</a>
+                </div>
                 {{text}}
               </div>
             </div>

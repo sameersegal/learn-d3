@@ -16,6 +16,22 @@ App.IndexRoute = Ember.Route.extend({
 	}
 });
 
+App.ChaptersIndexRoute = Ember.Route.extend({
+	model: function() {		
+		return {
+			"note": "### D3\n D3.js is a powerful library that can be used to process large amount of data within the browser and make complex data driven interaction possible. The library has been written by Mike Bostocks who works at NYTimes and has done some amazing visualizations for them.\n\n### Sandbox\n This is a sandbox for you to test d3 out and learn in an interactive manner. It is definitely a work in progress. Under the hood, the sandbox has been written in ember.js, markdown.js, codemirror.js and d3.js. \n\n### Getting Started\n To get started please select a chapter from the menu on top to start. Make edits to the code and data editors and see how your graph transforms. It will be a good idea to run this in chrome and debug this using chrome dev tools. Good luck!"
+		};
+	}
+});
+
+App.ResourcesRoute = Ember.Route.extend({
+	model: function() {		
+		return {
+			"note": "* [D3 Website](d3js.org)\n* [Simple Tutorials](http://alignedleft.com/tutorials/d3/)\n* [Convention for reusable charts](http://bost.ocks.org/mike/chart/)"
+		};
+	}
+});
+
 App.ChaptersRoute = Ember.Route.extend({
 	model: function() {		
 		return App.Chapter.find();
@@ -68,6 +84,7 @@ App.Chapter = DS.Model.extend({
 });
 
 App.Step = DS.Model.extend({
+	"title": DS.attr("string"),
 	"text": DS.attr("string"),
 	"code": DS.attr("string")
 });

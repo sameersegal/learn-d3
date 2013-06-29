@@ -85,7 +85,9 @@ App.StepController = Ember.ObjectController.extend({
 
 	load: function() {	
 		var code = this.get("content.code");
-		App.CodeEditors.code.setValue(code);
+		if(code) {
+			App.CodeEditors.code.setValue(code);
+		}
 	}
 });
 
